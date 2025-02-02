@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
@@ -13,4 +12,4 @@ student_marks = {
 @app.get("/api")
 async def get_marks(name: list[str]):
     marks = [student_marks.get(n, "Not Found") for n in name]
-    return JSONResponse(content={"marks": marks})
+    return marks
