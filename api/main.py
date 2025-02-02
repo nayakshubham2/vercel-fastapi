@@ -39,4 +39,4 @@ async def get_marks(name: str = None):
     if not_found:
         return {"message": f"Marks not found for: {', '.join(not_found)}"}
 
-    return {"marks": marks,"not_found": names}
+    return {"marks": marks,"not_found": name}
