@@ -12,7 +12,6 @@ def load_student_data():
 students_marks = load_student_data()
 
 @app.get('/api')
-async def get_marks():
-    names = request.args.getlist('name')
+async def get_marks(name: List[str]):
     marks = [students_marks.get(name, 'Not Found') for name in names]
     return jsonify({'marks': marks})
