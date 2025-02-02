@@ -22,3 +22,7 @@ app.add_middleware(
 async def get_marks(name: list[str]):
     marks = [student_marks.get(n, "Not Found") for n in name]
     return marks
+
+@app.get("/")
+async def get_default():
+    return "Hello World!"
