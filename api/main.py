@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import json
 
-app = FASTAPI()
+app = FastAPI()
 
 # Load student data from the q-vercel-python.json file
 def load_student_data():
