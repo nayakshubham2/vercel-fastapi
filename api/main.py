@@ -18,8 +18,8 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
-@app.post("/api")
-async def get_marks(name: list[str] = None):
+@app.get("/api/")
+async def get_marks(name: list[str] | None = None):
     if name is None:
         return {"message": "No names provided"}
     return {"received_names": name}
