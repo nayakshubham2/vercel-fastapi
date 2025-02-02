@@ -18,11 +18,12 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
-@app.get("/api/")
-async def get_marks(name: list[str]):
-    if name is None:
-        return {"message": "No names provided"}
-    return {"received_names": name}
+@app.get("/api")
+async def read_names(name: str = None):  # type: ignore
+    if name:
+        names = name.split("&name=") # split string by &name=
+        return {"names": names}
+    return {"message": "No names provided"}
 
 
 
