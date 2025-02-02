@@ -18,12 +18,27 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
+try:
+    with open("q-vercel-python.json", "r") as f:
+        student_marks = json.load(f)
+except FileNotFoundError:
+    student_marks = {}
+
 @app.get("/api")
 async def read_names(name: str = None):  # type: ignore
-    if name:
-        names = name.split("&name=") # split string by &name=
-        return {"names": names}
-    return {"message": "No names provided"}
+    marks = []
+    not_found = []
+    for student_name in name:
+        mark = student_marks.get(student_name)
+        if mark is not None:
+            marks.append(mark)
+        else:
+            not_found.append(student_name)
+
+    if not_found:
+      return {"message": f"Marks not found for: {', '.join(not_found)}"}
+    
+    return {"marks": marks}
 
 
 
