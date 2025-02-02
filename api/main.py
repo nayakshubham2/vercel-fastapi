@@ -19,10 +19,11 @@ app.add_middleware(
 )
 
 @app.get("/api")
-async def get_marks(name: Optional[list[str]] = None):
+async def get_marks(name: List[str] = None):
     if name is None:
         return {"message": "No names provided"}
     return {"received_names": name}
+
 
 
 @app.get("/")
