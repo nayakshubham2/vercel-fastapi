@@ -26,12 +26,11 @@ async def get_marks(name: str = None):
     if name is None:
         return {"message": "No names provided"}
 
-    names = name.split("&name=") # Split by &name= to get list of names
+    names = name.split("name=") # Split by &name= to get list of names
     marks = []
     not_found = []
     for student_name in names:
-      if student_name != "name": # Handle the initial "name"
-        mark = student_marks.get(student_name)
+        mark = student_marks.get(student_name.strip('?'))
         if mark is not None:
             marks.append(mark)
         else:
