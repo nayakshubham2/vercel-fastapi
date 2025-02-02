@@ -1,17 +1,16 @@
 from fastapi import FastAPI
-import json
+from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
-# Load student data from the q-vercel-python.json file
-def load_student_data():
-    with open('q-vercel-python.json', 'r') as file:
-        return json.load(file)
+# Sample marks data for 100 students
+student_marks = {
+    "X": 10,
+    "Y": 20,
+    # Add other student names and marks up to 100
+}
 
-# Read data from the JSON file
-students_marks = load_student_data()
-
-@app.get('/api')
-async def get_marks(name: List[str]):
-    marks = [students_marks.get(name, 'Not Found')]
-    return jsonify({'marks': marks})
+@app.get("/api")
+async def get_marks(name: list[str]):
+    marks = [student_marks.get(n, "Not Found") for n in name]
+    return JSONResponse(content={"marks": marks})
