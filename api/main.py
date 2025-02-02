@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -22,11 +23,11 @@ for student in student_data:
 
 
 @app.get("/api")
-async def get_marks(name: str = None):
+async def get_marks(name: List[str]):
     if name is None:
         return {"message": "No names provided"}
 
-    names = name.split("name=") # Split by &name= to get list of names
+    names = name # Split by &name= to get list of names
     marks = []
     not_found = []
     for student_name in names:
