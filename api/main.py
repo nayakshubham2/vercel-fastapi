@@ -22,16 +22,15 @@ for student in student_data:
 
 
 @app.get("/api")
-async def get_marks(name: str = None):
+async def get_marks(name: list[str] = None):
     if name is None:
         return {"message": "No names provided"}
 
     names = name.split("&name=")
     marks = []
     not_found = []
-    for student_name in names:
-      if student_name != "name":
-        mark = student_marks.get(student_name)
+    for n in names:
+        mark = student_marks.get(n)
         if mark is not None:
             marks.append(mark)
         else:
