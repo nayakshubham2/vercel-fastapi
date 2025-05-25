@@ -15,7 +15,7 @@ app.add_middleware(
 )
 
 # Load and preprocess marks from JSON file
-MARKS_FILE = Path(__file__).parent / "marks.json"
+MARKS_FILE = Path(__file__).parent / "q-vercel-python.json"
 with open(MARKS_FILE) as f:
     marks_list = json.load(f)
     marks_db = {entry["name"]: entry["marks"] for entry in marks_list}
